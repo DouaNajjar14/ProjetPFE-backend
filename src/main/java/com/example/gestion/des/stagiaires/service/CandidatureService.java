@@ -64,8 +64,6 @@ public class CandidatureService {
                 .candidat2(candidat2)
                 .sujetChoix1(sujetChoix1)
                 .sujetChoix2(sujetChoix2)
-                .dateDebut(request.getDateDebut())
-                .dateFin(request.getDateFin())
                 .build();
 
         Candidature saved = candidatureRepository.save(candidature);
@@ -148,8 +146,6 @@ public class CandidatureService {
                 .estBinome(candidature.getEstBinome())
                 .dateDepot(candidature.getDateDepot())
                 .dateEntretien(candidature.getDateEntretien())
-                .dateDebut(candidature.getDateDebut())
-                .dateFin(candidature.getDateFin())
                 .candidat1(candidatService.toResponse(candidature.getCandidat1()))
                 .candidat2(candidature.getCandidat2() != null
                         ? candidatService.toResponse(candidature.getCandidat2())

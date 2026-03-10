@@ -58,13 +58,6 @@ public class Candidature {
     @JoinColumn(name = "sujet_choix2_id")
     private SujetPfe sujetChoix2;
 
-    // Dates de stage souhaitées
-    @Column(nullable = false)
-    private LocalDateTime dateDebut;
-
-    @Column(nullable = false)
-    private LocalDateTime dateFin;
-
     @PrePersist
     protected void onCreate() {
         dateDepot = LocalDateTime.now();

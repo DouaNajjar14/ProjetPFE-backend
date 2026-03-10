@@ -41,6 +41,7 @@ public class CandidatureController {
                     lettreMotivation2);
             return ResponseEntity.status(HttpStatus.CREATED).body(response);
         } catch (Exception e) {
+            e.printStackTrace();
             throw new RuntimeException("Erreur lors de la création de la candidature: " + e.getMessage());
         }
     }

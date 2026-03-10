@@ -4,7 +4,6 @@ import com.example.gestion.des.stagiaires.enums.TypeStage;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Data
@@ -24,11 +23,4 @@ public class CandidatureRequest {
     // Sujets PFE (obligatoires si typeStage = PFE)
     private UUID sujetChoix1Id;
     private UUID sujetChoix2Id;
-
-    // Dates du stage
-    @NotNull(message = "La date de début est obligatoire")
-    private LocalDateTime dateDebut;
-
-    @NotNull(message = "La date de fin est obligatoire")
-    private LocalDateTime dateFin;
 }

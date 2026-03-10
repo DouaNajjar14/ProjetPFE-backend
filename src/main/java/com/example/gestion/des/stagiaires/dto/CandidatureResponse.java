@@ -17,8 +17,6 @@ public class CandidatureResponse {
     private Boolean estBinome;
     private LocalDateTime dateDepot;
     private LocalDateTime dateEntretien;
-    private LocalDateTime dateDebut;
-    private LocalDateTime dateFin;
 
     // Candidat principal
     private CandidatResponse candidat1;
