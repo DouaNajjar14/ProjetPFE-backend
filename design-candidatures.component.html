@@ -1,0 +1,679 @@
+<!-- ══ TOAST (global) ══ -->
+<p-toast position="bottom-right" />
+
+<div class="cand-page">
+  <!-- ══ PAGE HEADER ══ -->
+  <div class="cand-header">
+    <div class="cand-header-left">
+      <div class="cand-header-icon">
+        <i class="pi pi-file text-white text-xl"></i>
+      </div>
+      <div>
+        <h1 class="cand-title">Candidatures</h1>
+        <p class="cand-subtitle">
+          {{ filteredCandidatures().length }} résultat(s) affiché(s)
+        </p>
+      </div>
+    </div>
+    <p-button
+      icon="pi pi-refresh"
+      label="Actualiser"
+      [outlined]="true"
+      severity="secondary"
+      size="small"
+      (onClick)="loadCandidatures()"
+    />
+  </div>
+
+  <!-- ══ STAT CARDS ══ -->
+  <div class="cand-stats">
+    <div class="stat-card">
+      <div class="stat-accent stat-accent--total"></div>
+      <div class="stat-icon stat-icon--total"><i class="pi pi-file"></i></div>
+      <div>
+        <span class="stat-num">{{ stats()?.total ?? "—" }}</span>
+        <span class="stat-lbl">Total</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-accent stat-accent--amber"></div>
+      <div class="stat-icon stat-icon--amber"><i class="pi pi-clock"></i></div>
+      <div>
+        <span class="stat-num">{{
+          getStatCount("EN_ATTENTE", stats()?.parStatut)
+        }}</span>
+        <span class="stat-lbl">En attente</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-accent stat-accent--green"></div>
+      <div class="stat-icon stat-icon--green">
+        <i class="pi pi-check-circle"></i>
+      </div>
+      <div>
+        <span class="stat-num">{{
+          getStatCount("ACCEPTE", stats()?.parStatut)
+        }}</span>
+        <span class="stat-lbl">Acceptées</span>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-accent stat-accent--red"></div>
+      <div class="stat-icon stat-icon--red">
+        <i class="pi pi-times-circle"></i>
+      </div>
+      <div>
+        <span class="stat-num">{{
+          getStatCount("REJETE", stats()?.parStatut)
+        }}</span>
+        <span class="stat-lbl">Rejetées</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ MAIN PANEL ══ -->
+  <div class="cand-panel">
+    <!-- Filters -->
+    <div class="cand-filters">
+      <div class="flex-1 relative cand-search-wrap">
+        <i
+          class="pi pi-search absolute left-3 top-1/2 -translate-y-1/2 text-surface-400"
+        ></i>
+        <input
+          pInputText
+          type="text"
+          placeholder="Nom, prénom, email, sujet..."
+          [(ngModel)]="searchQuery"
+          (ngModelChange)="onSearchInput()"
+          class="w-full pl-10 cand-search-input"
+        />
+      </div>
+
+      <p-dropdown
+        [options]="[
+          { label: 'En attente', value: 'EN_ATTENTE' },
+          { label: 'Présélectionné', value: 'PRESELECTIONNE' },
+          { label: 'Accepté', value: 'ACCEPTE' },
+          { label: 'Rejeté', value: 'REJETE' },
+        ]"
+        [(ngModel)]="filterStatut"
+        (ngModelChange)="onFilterChange()"
+        optionLabel="label"
+        optionValue="value"
+        placeholder="Tous les statuts"
+        styleClass="w-48"
+      />
+
+      @if (searchQuery || filterStatut) {
+        <p-button
+          icon="pi pi-times"
+          label="Effacer"
+          [outlined]="true"
+          severity="secondary"
+          size="small"
+          (onClick)="clearFilters()"
+        />
+      }
+    </div>
+
+    <!-- Table PrimeNG -->
+    <p-table
+      [value]="filteredCandidatures()"
+      [loading]="isLoading()"
+      [paginator]="filteredCandidatures().length > 10"
+      [rows]="10"
+      [rowsPerPageOptions]="[10, 25, 50]"
+      [rowHover]="true"
+      responsiveLayout="scroll"
+      styleClass="cand-table"
+    >
+      <!-- Header -->
+      <ng-template pTemplate="header">
+        <tr>
+          <th pSortableColumn="candidat1.nom">
+            Candidat(s) <p-sortIcon field="candidat1.nom" />
+          </th>
+          @if (activeTab() === "TOUS") {
+            <th>Type</th>
+          }
+          <th pSortableColumn="statut">Statut <p-sortIcon field="statut" /></th>
+          <th>Sujet (1er choix)</th>
+          <th pSortableColumn="dateDepot">
+            Date dépôt <p-sortIcon field="dateDepot" />
+          </th>
+          <th class="text-center">Action</th>
+        </tr>
+      </ng-template>
+
+      <!-- Body -->
+      <ng-template pTemplate="body" let-c>
+        <tr class="cand-row" (click)="openDetail(c)">
+          <!-- Candidat -->
+          <td>
+            <div class="flex items-center gap-3">
+              <p-avatar
+                [label]="getInitials(c.candidat1?.prenom, c.candidat1?.nom)"
+                shape="square"
+                styleClass="cand-avatar"
+              />
+              <div class="min-w-0">
+                <p class="cand-name">
+                  {{ c.candidat1?.prenom }} {{ c.candidat1?.nom }}
+                </p>
+                <p class="cand-email">
+                  {{ c.candidat1?.email }}
+                </p>
+                @if (c.candidat2) {
+                  <div class="cand-binome-inline">
+                    <p-avatar
+                      [label]="
+                        getInitials(c.candidat2?.prenom, c.candidat2?.nom)
+                      "
+                      shape="square"
+                      styleClass="cand-avatar-sm"
+                    />
+                    <span class="cand-binome-name"
+                      >+ {{ c.candidat2.prenom }} {{ c.candidat2.nom }}</span
+                    >
+                  </div>
+                }
+              </div>
+            </div>
+          </td>
+
+          <!-- Type -->
+          @if (activeTab() === "TOUS") {
+            <td>
+              <p-tag
+                [value]="getTypeLabel(c.typeStage)"
+                [severity]="getTypeSeverity(c.typeStage)"
+              />
+            </td>
+          }
+
+          <!-- Statut -->
+          <td>
+            <p-tag
+              [value]="getStatutLabel(c.statut)"
+              [severity]="getStatutSeverity(c.statut)"
+              [icon]="
+                c.statut === 'EN_ATTENTE'
+                  ? 'pi pi-clock'
+                  : c.statut === 'PRESELECTIONNE'
+                    ? 'pi pi-star'
+                    : c.statut === 'ACCEPTE'
+                      ? 'pi pi-check'
+                      : 'pi pi-times'
+              "
+            />
+          </td>
+
+          <!-- Sujet -->
+          <td class="max-w-[220px]">
+            @if (c.sujetChoix1) {
+              <p class="cand-sujet-titre">
+                {{ c.sujetChoix1.titre }}
+              </p>
+              <p class="cand-sujet-dept">
+                {{ c.sujetChoix1.departementNom }}
+              </p>
+            } @else {
+              <span class="text-surface-300 text-sm">—</span>
+            }
+          </td>
+
+          <!-- Date -->
+          <td class="whitespace-nowrap text-sm text-surface-500">
+            {{ formatDate(c.dateDepot) }}
+          </td>
+
+          <!-- Action -->
+          <td class="text-center" (click)="$event.stopPropagation()">
+            <p-button
+              icon="pi pi-eye"
+              [rounded]="true"
+              [text]="true"
+              severity="secondary"
+              size="small"
+              (onClick)="openDetail(c)"
+              pTooltip="Voir les détails"
+              tooltipPosition="left"
+            />
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Empty -->
+      <ng-template pTemplate="emptymessage">
+        <tr>
+          <td [attr.colspan]="activeTab() === 'TOUS' ? 6 : 5">
+            <div class="cand-empty">
+              <div class="cand-empty-icon">
+                <i class="pi pi-inbox"></i>
+              </div>
+              <p class="cand-empty-title">
+                Aucune candidature trouvée
+              </p>
+              <p class="cand-empty-desc">
+                {{
+                  searchQuery || filterStatut
+                    ? "Modifiez vos critères de recherche"
+                    : "Aucune candidature pour ce type de stage"
+                }}
+              </p>
+              @if (searchQuery || filterStatut) {
+                <p-button
+                  label="Effacer les filtres"
+                  icon="pi pi-filter-slash"
+                  [outlined]="true"
+                  severity="secondary"
+                  size="small"
+                  (onClick)="clearFilters()"
+                />
+              }
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+      <!-- Footer -->
+      <ng-template pTemplate="footer">
+        <tr>
+          <td
+            [attr.colspan]="activeTab() === 'TOUS' ? 6 : 5"
+            class="cand-table-footer"
+          >
+            <i class="pi pi-list" style="font-size:11px;opacity:.4"></i>
+            {{ filteredCandidatures().length }} résultat(s) ·
+            {{ candidatures().length }} au total
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════════════════
+     DRAWER LATÉRAL — Détail candidature
+══════════════════════════════════════════════════════════════════════ -->
+<p-dialog
+  [visible]="showDetail()"
+  (visibleChange)="!$event ? closeDetail() : null"
+  position="right"
+  styleClass="cand-drawer"
+  [modal]="true"
+  [closeOnEscape]="true"
+  [style]="{ width: '450px', height: '100vh', margin: 0, maxHeight: '100vh' }"
+  contentStyleClass="h-full"
+>
+  <ng-template pTemplate="header">
+    @if (selectedCandidature(); as c) {
+      <div class="drawer-head">
+        <div class="drawer-head-avatar-wrap">
+          <p-avatar
+            [label]="getInitials(c.candidat1?.prenom, c.candidat1?.nom)"
+            shape="square"
+            styleClass="drawer-head-avatar"
+          />
+          <div class="drawer-head-avatar-dot"></div>
+        </div>
+        <div class="min-w-0 flex-1">
+          <h2 class="drawer-head-name">
+            {{ c.candidat1?.prenom }} {{ c.candidat1?.nom }}
+          </h2>
+          <p class="drawer-head-uni">{{ c.candidat1?.universiteNom }}</p>
+          <div class="drawer-head-tags">
+            <p-tag
+              [value]="getTypeLabel(c.typeStage)"
+              [severity]="getTypeSeverity(c.typeStage)"
+            />
+            <p-tag
+              [value]="getStatutLabel(c.statut)"
+              [severity]="
+                c.statut === 'EN_ATTENTE'
+                  ? 'warning'
+                  : c.statut === 'PRESELECTIONNE'
+                    ? 'info'
+                    : c.statut === 'ACCEPTE'
+                      ? 'success'
+                      : 'danger'
+              "
+            />
+            @if (c.estBinome) {
+              <p-tag value="Binôme" severity="info" icon="pi pi-users" />
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </ng-template>
+
+  <ng-template pTemplate="content">
+    @if (selectedCandidature(); as c) {
+      <div class="drawer-body">
+        <!-- Dates -->
+        <section class="drawer-section">
+          <div class="drawer-section-title">
+            <div class="drawer-section-icon"><i class="pi pi-calendar"></i></div>
+            <span>Dates</span>
+          </div>
+          <div class="drawer-grid-2">
+            <div class="drawer-field">
+              <span class="drawer-field-label">Date de dépôt</span>
+              <span class="drawer-field-value">{{
+                formatDate(c.dateDepot)
+              }}</span>
+            </div>
+            <div class="drawer-field">
+              <span class="drawer-field-label">Date d'entretien</span>
+              <span class="drawer-field-value">{{
+                formatDate(c.dateEntretien)
+              }}</span>
+            </div>
+          </div>
+        </section>
+
+        <div class="drawer-divider"></div>
+
+        <!-- Candidat principal -->
+        <section class="drawer-section">
+          <div class="drawer-section-title">
+            <div class="drawer-section-icon"><i class="pi pi-user"></i></div>
+            <span>Candidat principal</span>
+          </div>
+          <div class="drawer-grid-2">
+            <div class="drawer-field">
+              <span class="drawer-field-label">
+                <i class="pi pi-envelope mr-1 text-xs"></i>Email
+              </span>
+              <span class="drawer-field-value truncate">{{
+                c.candidat1.email
+              }}</span>
+            </div>
+            <div class="drawer-field">
+              <span class="drawer-field-label">
+                <i class="pi pi-phone mr-1 text-xs"></i>Téléphone
+              </span>
+              <span class="drawer-field-value">{{ c.candidat1.tel }}</span>
+            </div>
+            <div class="drawer-field">
+              <span class="drawer-field-label">
+                <i class="pi pi-graduation-cap mr-1 text-xs"></i>Niveau
+              </span>
+              <span class="drawer-field-value">{{
+                c.candidat1.niveauAcademique
+              }}</span>
+            </div>
+            <div class="drawer-field">
+              <span class="drawer-field-label">
+                <i class="pi pi-building mr-1 text-xs"></i>Établissement
+              </span>
+              <span class="drawer-field-value truncate">{{
+                c.candidat1.universiteNom
+              }}</span>
+            </div>
+          </div>
+          <!-- Documents -->
+          <div class="drawer-docs">
+            @if (c.candidat1.cv) {
+              <a
+                [href]="c.candidat1.cv"
+                target="_blank"
+                rel="noopener"
+                class="drawer-doc-link"
+              >
+                <div class="drawer-doc-icon drawer-doc-icon--cv">
+                  <i class="pi pi-file-pdf"></i>
+                </div>
+                <span>CV</span>
+                <i class="pi pi-external-link ml-auto text-xs opacity-30"></i>
+              </a>
+            } @else {
+              <div class="drawer-doc-na">
+                <i class="pi pi-file opacity-30"></i>
+                <span class="opacity-40">CV non fourni</span>
+              </div>
+            }
+            @if (c.candidat1.lettreMotivation) {
+              <a
+                [href]="c.candidat1.lettreMotivation"
+                target="_blank"
+                rel="noopener"
+                class="drawer-doc-link"
+              >
+                <div class="drawer-doc-icon drawer-doc-icon--lettre">
+                  <i class="pi pi-file-edit"></i>
+                </div>
+                <span>Lettre de motivation</span>
+                <i class="pi pi-external-link ml-auto text-xs opacity-30"></i>
+              </a>
+            } @else {
+              <div class="drawer-doc-na">
+                <i class="pi pi-file-edit opacity-30"></i>
+                <span class="opacity-40">Lettre non fournie</span>
+              </div>
+            }
+          </div>
+        </section>
+
+        <!-- Co-candidat -->
+        @if (c.candidat2) {
+          <div class="drawer-divider"></div>
+          <section class="drawer-section">
+            <div class="drawer-section-title drawer-section-title--binome">
+              <div class="drawer-section-icon drawer-section-icon--binome"><i class="pi pi-users"></i></div>
+              <span>Co-candidat (Binôme)</span>
+            </div>
+            <div class="drawer-binome-box">
+              <div class="flex items-center gap-3 mb-3">
+                <p-avatar
+                  [label]="getInitials(c.candidat2?.prenom, c.candidat2?.nom)"
+                  shape="square"
+                  styleClass="drawer-binome-avatar"
+                />
+                <div>
+                  <p class="font-semibold text-sm">
+                    {{ c.candidat2?.prenom }} {{ c.candidat2?.nom }}
+                  </p>
+                  <p class="text-xs text-surface-400">
+                    {{ c.candidat2?.universiteNom }}
+                  </p>
+                </div>
+              </div>
+              <div class="drawer-grid-2">
+                <div class="drawer-field">
+                  <span class="drawer-field-label">Email</span>
+                  <span class="drawer-field-value truncate">{{
+                    c.candidat2?.email
+                  }}</span>
+                </div>
+                <div class="drawer-field">
+                  <span class="drawer-field-label">Téléphone</span>
+                  <span class="drawer-field-value">{{
+                    c.candidat2?.tel
+                  }}</span>
+                </div>
+                <div class="drawer-field">
+                  <span class="drawer-field-label">Niveau</span>
+                  <span class="drawer-field-value">{{
+                    c.candidat2?.niveauAcademique
+                  }}</span>
+                </div>
+                <div class="drawer-field">
+                  <span class="drawer-field-label">Établissement</span>
+                  <span class="drawer-field-value truncate">{{
+                    c.candidat2?.universiteNom
+                  }}</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        }
+
+        <!-- Sujets PFE -->
+        @if (c.sujetChoix1 || c.sujetChoix2) {
+          <div class="drawer-divider"></div>
+          <section class="drawer-section">
+            <div class="drawer-section-title">
+              <div class="drawer-section-icon"><i class="pi pi-book"></i></div>
+              <span>Choix de sujets PFE</span>
+            </div>
+            <div class="space-y-2">
+              @if (c.sujetChoix1) {
+                <div class="drawer-choice drawer-choice--1">
+                  <span class="drawer-choice-num drawer-choice-num--1">1</span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-sm font-semibold">
+                      {{ c.sujetChoix1.titre }}
+                    </p>
+                    <p class="text-xs text-surface-400 mt-0.5">
+                      {{ c.sujetChoix1.departementNom }}
+                    </p>
+                  </div>
+                  <p-tag value="1er choix" severity="danger" />
+                </div>
+              }
+              @if (c.sujetChoix2) {
+                <div class="drawer-choice">
+                  <span class="drawer-choice-num">2</span>
+                  <div class="min-w-0 flex-1">
+                    <p class="text-sm font-semibold">
+                      {{ c.sujetChoix2.titre }}
+                    </p>
+                    <p class="text-xs text-surface-400 mt-0.5">
+                      {{ c.sujetChoix2.departementNom }}
+                    </p>
+                  </div>
+                  <p-tag value="2ème choix" severity="secondary" />
+                </div>
+              }
+            </div>
+          </section>
+        }
+
+        <!-- Date entretien si EN_ATTENTE -->
+        @if (c.statut === "EN_ATTENTE") {
+          <div class="drawer-divider"></div>
+          <section class="drawer-section">
+            <div class="drawer-section-title">
+              <div class="drawer-section-icon"><i class="pi pi-calendar-plus"></i></div>
+              <span>Planifier l'entretien</span>
+            </div>
+            <label class="drawer-input-label">
+              Date d'entretien <span class="text-red-500">*</span>
+            </label>
+            <input
+              type="datetime-local"
+              [(ngModel)]="dateEntretienInput"
+              class="drawer-input"
+            />
+          </section>
+        }
+      </div>
+    }
+  </ng-template>
+
+  <!-- Footer actions -->
+  <ng-template pTemplate="footer">
+    @if (selectedCandidature(); as c) {
+      <div class="drawer-footer">
+        @if (c.statut === "EN_ATTENTE") {
+          <p-button
+            label="Présélectionner"
+            icon="pi pi-check"
+            severity="info"
+            [loading]="isUpdatingStatut()"
+            (onClick)="changerStatutDepuisDetail('PRESELECTIONNE')"
+          />
+          <p-button
+            label="Refuser"
+            icon="pi pi-times"
+            severity="danger"
+            [outlined]="true"
+            [loading]="isUpdatingStatut()"
+            (onClick)="changerStatutDepuisDetail('REJETE')"
+          />
+        }
+        @if (c.statut === "PRESELECTIONNE") {
+          <p-button
+            label="Accepter"
+            icon="pi pi-check-circle"
+            severity="success"
+            (onClick)="openAcceptModal()"
+          />
+          <p-button
+            label="Refuser"
+            icon="pi pi-times"
+            severity="danger"
+            [outlined]="true"
+            [loading]="isUpdatingStatut()"
+            (onClick)="changerStatutDepuisDetail('REJETE')"
+          />
+        }
+        <p-button
+          label="Fermer"
+          [outlined]="true"
+          severity="secondary"
+          [disabled]="isUpdatingStatut()"
+          (onClick)="closeDetail()"
+          class="ml-auto"
+        />
+      </div>
+    }
+  </ng-template>
+</p-dialog>
+
+<!-- Modal d'acceptation (Date de début) -->
+<p-dialog
+  [(visible)]="showAcceptModal"
+  [modal]="true"
+  [style]="{ width: '420px' }"
+  styleClass="cand-accept-modal"
+  [closable]="!isUpdatingStatut()"
+>
+  <ng-template pTemplate="header">
+    <div class="accept-modal-header">
+      <div class="accept-modal-icon">
+        <i class="pi pi-check-circle"></i>
+      </div>
+      <div>
+        <h3 class="accept-modal-title">Valider l'acceptation</h3>
+        <p class="accept-modal-subtitle">Dernière étape avant confirmation</p>
+      </div>
+    </div>
+  </ng-template>
+
+  <div class="accept-modal-body">
+    <p class="accept-modal-desc">
+      Veuillez fixer la <strong>date de début de stage</strong> pour ce candidat
+      avant de valider l'acceptation.
+    </p>
+    <label class="drawer-input-label">
+      Date de début <span class="text-red-500">*</span>
+    </label>
+    <input
+      type="date"
+      [(ngModel)]="dateDebutInput"
+      class="drawer-input"
+    />
+  </div>
+  <ng-template pTemplate="footer">
+    <div class="accept-modal-footer">
+      <p-button
+        label="Annuler"
+        severity="secondary"
+        [outlined]="true"
+        (onClick)="closeAcceptModal()"
+        [disabled]="isUpdatingStatut()"
+      />
+      <p-button
+        label="Confirmer l'acceptation"
+        severity="success"
+        icon="pi pi-check"
+        [loading]="isUpdatingStatut()"
+        (onClick)="changerStatutDepuisDetail('ACCEPTE')"
+      />
+    </div>
+  </ng-template>
+</p-dialog>
+
