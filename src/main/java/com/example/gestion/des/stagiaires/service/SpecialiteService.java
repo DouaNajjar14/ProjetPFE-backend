@@ -27,7 +27,12 @@ public class SpecialiteService {
 
     @Transactional
     public SpecialiteResponse creer(SpecialiteRequest request) {
-        if (specialiteRepository.existsByNomAndDepartementId(request.getNom(), request.getDepartementId())) {
+        String nomNormalise = request.getNom() != null ? request.getNom().trim() : null;
+        if (nomNormalise == null || nomNormalise.isBlank()) {
+            throw new RuntimeException("Le nom de la spécialité est obligatoire");
+        }
+
+        if (specialiteRepository.existsByNomAndDepartementIdAndArchiveFalse(nomNormalise, request.getDepartementId())) {
             throw new RuntimeException("Une spécialité avec ce nom existe déjà dans ce département");
         }
 
@@ -36,9 +41,10 @@ public class SpecialiteService {
                         () -> new RuntimeException("Département non trouvé avec l'id : " + request.getDepartementId()));
 
         Specialite specialite = Specialite.builder()
-                .nom(request.getNom())
+                .nom(nomNormalise)
                 .departement(departement)
                 .competences(new ArrayList<>())
+                .archive(false)
                 .build();
 
         Specialite saved = specialiteRepository.save(specialite);
@@ -50,10 +56,15 @@ public class SpecialiteService {
         Specialite specialite = specialiteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));
 
+        String nomNormalise = request.getNom() != null ? request.getNom().trim() : null;
+        if (nomNormalise == null || nomNormalise.isBlank()) {
+            throw new RuntimeException("Le nom de la spécialité est obligatoire");
+        }
+
         // Vérifier si le nom est déjà utilisé par une autre spécialité dans le même
         // département
-        if (!specialite.getNom().equals(request.getNom())
-                && specialiteRepository.existsByNomAndDepartementId(request.getNom(), request.getDepartementId())) {
+        if (specialiteRepository.existsByNomAndDepartementIdAndArchiveFalseAndIdNot(nomNormalise,
+                request.getDepartementId(), id)) {
             throw new RuntimeException("Une spécialité avec ce nom existe déjà dans ce département");
         }
 
@@ -61,7 +72,7 @@ public class SpecialiteService {
                 .orElseThrow(
                         () -> new RuntimeException("Département non trouvé avec l'id : " + request.getDepartementId()));
 
-        specialite.setNom(request.getNom());
+        specialite.setNom(nomNormalise);
         specialite.setDepartement(departement);
 
         Specialite updated = specialiteRepository.save(specialite);
@@ -69,26 +80,72 @@ public class SpecialiteService {
     }
 
     public void supprimer(Long id) {
-        if (!specialiteRepository.existsById(id)) {
-            throw new RuntimeException("Spécialité non trouvée avec l'id : " + id);
+        Specialite specialite = specialiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));
+
+        if (Boolean.TRUE.equals(specialite.getArchive())) {
+            return;
         }
-        specialiteRepository.deleteById(id);
+
+        specialite.setArchive(true);
+        specialiteRepository.save(specialite);
+
+        List<com.example.gestion.des.stagiaires.entity.Competence> competences = competenceRepository
+                .findBySpecialiteIdAndArchiveFalse(id);
+        if (!competences.isEmpty()) {
+            competences.forEach(c -> c.setArchive(true));
+            competenceRepository.saveAll(competences);
+        }
     }
 
+    @Transactional
+    public SpecialiteResponse desarchiver(Long id) {
+        Specialite specialite = specialiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));
+
+        if (!Boolean.TRUE.equals(specialite.getArchive())) {
+            return toResponse(specialite);
+        }
+
+        specialite.setArchive(false);
+        specialiteRepository.save(specialite);
+
+        // Restore competences that were archived with this specialite.
+        List<com.example.gestion.des.stagiaires.entity.Competence> competences = competenceRepository
+                .findBySpecialiteIdAndArchiveTrue(id);
+        if (!competences.isEmpty()) {
+            competences.forEach(c -> c.setArchive(false));
+            competenceRepository.saveAll(competences);
+        }
+
+        return toResponse(specialite);
+    }
+
+    @Transactional(readOnly = true)
     public List<SpecialiteResponse> listerToutes() {
-        return specialiteRepository.findAll()
+        return specialiteRepository.findByArchiveFalse()
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<SpecialiteResponse> listerParDepartement(UUID departementId) {
-        return specialiteRepository.findByDepartementId(departementId)
+        return specialiteRepository.findByDepartementIdAndArchiveFalse(departementId)
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
+    public List<SpecialiteResponse> listerArchivesParDepartement(UUID departementId) {
+        return specialiteRepository.findByDepartementIdAndArchiveTrue(departementId)
+                .stream()
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
     public SpecialiteResponse trouverParId(Long id) {
         Specialite specialite = specialiteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));

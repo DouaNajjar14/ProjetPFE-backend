@@ -3,6 +3,7 @@ C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\JacksonConfig.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\JwtAuthenticationFilter.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\SecurityConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\AgentRHCandidatureController.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\AgentRHController.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\AuthController.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\CandidatController.java
@@ -50,6 +51,8 @@ C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Specialite.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\SpecialiteUniversitaire.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\SujetPfe.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Token.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\TokenType.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Universite.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Utilisateur.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\NIVEAU.java
@@ -67,6 +70,7 @@ C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteRepository.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteUniversitaireRepository.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SujetPfeRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\TokenRepository.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\UniversiteRepository.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\UtilisateurRepository.java
 C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\AgentRHService.java

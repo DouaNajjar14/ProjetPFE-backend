@@ -23,4 +23,8 @@ public class Competence {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "specialite_id")
     private Specialite specialite;
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean archive = false;
 }

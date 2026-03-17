@@ -15,5 +15,8 @@ public interface DepartementRepository extends JpaRepository<Departement, UUID> 
     List<Departement> findByArchiveTrue();
 
     boolean existsByNomAndArchiveFalse(String nom);
-}
 
+    boolean existsByNomIgnoreCase(String nom);
+
+    boolean existsByNomIgnoreCaseAndIdNot(String nom, UUID id);
+}

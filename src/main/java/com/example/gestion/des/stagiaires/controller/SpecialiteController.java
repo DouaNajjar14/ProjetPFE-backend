@@ -43,6 +43,13 @@ public class SpecialiteController {
         return ResponseEntity.noContent().build();
     }
 
+    @PatchMapping("/{id}/desarchiver")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<SpecialiteResponse> desarchiver(@PathVariable Long id) {
+        SpecialiteResponse response = specialiteService.desarchiver(id);
+        return ResponseEntity.ok(response);
+    }
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
     public ResponseEntity<List<SpecialiteResponse>> lister() {
@@ -53,6 +60,12 @@ public class SpecialiteController {
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
     public ResponseEntity<List<SpecialiteResponse>> listerParDepartement(@PathVariable UUID departementId) {
         return ResponseEntity.ok(specialiteService.listerParDepartement(departementId));
+    }
+
+    @GetMapping("/departement/{departementId}/archives")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
+    public ResponseEntity<List<SpecialiteResponse>> listerArchivesParDepartement(@PathVariable UUID departementId) {
+        return ResponseEntity.ok(specialiteService.listerArchivesParDepartement(departementId));
     }
 
     @GetMapping("/{id}")

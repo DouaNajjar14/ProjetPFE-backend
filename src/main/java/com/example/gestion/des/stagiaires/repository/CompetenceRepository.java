@@ -11,11 +11,17 @@ import java.util.Optional;
 public interface CompetenceRepository extends JpaRepository<Competence, Long> {
     Optional<Competence> findByNom(String nom);
 
-    boolean existsByNomAndSpecialiteId(String nom, Long specialiteId);
+    boolean existsByNomAndSpecialiteIdAndArchiveFalse(String nom, Long specialiteId);
+
+    boolean existsByNomAndSpecialiteIdAndArchiveFalseAndIdNot(String nom, Long specialiteId, Long id);
 
     boolean existsByNom(String nom);
 
     List<Competence> findByIdIn(List<Long> ids);
 
-    List<Competence> findBySpecialiteId(Long specialiteId);
+    List<Competence> findByArchiveFalse();
+
+    List<Competence> findBySpecialiteIdAndArchiveFalse(Long specialiteId);
+
+    List<Competence> findBySpecialiteIdAndArchiveTrue(Long specialiteId);
 }

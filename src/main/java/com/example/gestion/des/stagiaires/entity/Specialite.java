@@ -28,4 +28,8 @@ public class Specialite {
     @OneToMany(mappedBy = "specialite", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Competence> competences = new ArrayList<>();
+
+    @Builder.Default
+    @Column(nullable = false)
+    private Boolean archive = false;
 }

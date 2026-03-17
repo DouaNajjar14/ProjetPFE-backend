@@ -15,18 +15,19 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin/competences")
 @RequiredArgsConstructor
-@PreAuthorize("hasRole('ADMIN')")
 public class CompetenceController {
 
     private final CompetenceService competenceService;
 
     @PostMapping
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CompetenceResponse> creer(@Valid @RequestBody CompetenceRequest request) {
         CompetenceResponse response = competenceService.creer(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<CompetenceResponse> modifier(
             @PathVariable Long id,
             @Valid @RequestBody CompetenceRequest request) {
@@ -35,9 +36,17 @@ public class CompetenceController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         competenceService.supprimer(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PatchMapping("/{id}/desarchiver")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<CompetenceResponse> desarchiver(@PathVariable Long id) {
+        CompetenceResponse response = competenceService.desarchiver(id);
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
@@ -50,6 +59,12 @@ public class CompetenceController {
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
     public ResponseEntity<List<CompetenceResponse>> listerParSpecialite(@PathVariable Long specialiteId) {
         return ResponseEntity.ok(competenceService.listerParSpecialite(specialiteId));
+    }
+
+    @GetMapping("/specialite/{specialiteId}/archives")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
+    public ResponseEntity<List<CompetenceResponse>> listerArchivesParSpecialite(@PathVariable Long specialiteId) {
+        return ResponseEntity.ok(competenceService.listerArchivesParSpecialite(specialiteId));
     }
 
     @GetMapping("/{id}")

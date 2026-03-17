@@ -3,6 +3,8 @@ package com.example.gestion.des.stagiaires.service;
 import com.example.gestion.des.stagiaires.dto.EncadrantRequest;
 import com.example.gestion.des.stagiaires.dto.EncadrantResponse;
 import com.example.gestion.des.stagiaires.dto.EncadrantUpdateRequest;
+import com.example.gestion.des.stagiaires.dto.SpecialiteResponse;
+import com.example.gestion.des.stagiaires.dto.CompetenceResponse;
 import com.example.gestion.des.stagiaires.entity.Competence;
 import com.example.gestion.des.stagiaires.entity.Departement;
 import com.example.gestion.des.stagiaires.entity.Encadrant;
@@ -32,8 +34,6 @@ public class EncadrantService {
     private final DepartementRepository departementRepository;
     private final SpecialiteRepository specialiteRepository;
     private final CompetenceRepository competenceRepository;
-    private final SpecialiteService specialiteService;
-    private final CompetenceService competenceService;
     private final PasswordEncoder passwordEncoder;
 
     @Transactional
@@ -143,6 +143,7 @@ public class EncadrantService {
         return toResponse(unarchived);
     }
 
+    @Transactional(readOnly = true)
     public List<EncadrantResponse> listerActifs() {
         return encadrantRepository.findByActif(true)
                 .stream()
@@ -150,6 +151,7 @@ public class EncadrantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<EncadrantResponse> listerArchives() {
         return encadrantRepository.findByActif(false)
                 .stream()
@@ -157,6 +159,7 @@ public class EncadrantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public List<EncadrantResponse> listerTous() {
         return encadrantRepository.findAll()
                 .stream()
@@ -164,12 +167,14 @@ public class EncadrantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional(readOnly = true)
     public EncadrantResponse trouverParId(UUID id) {
         Encadrant encadrant = encadrantRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Encadrant non trouvé avec l'id : " + id));
         return toResponse(encadrant);
     }
 
+    @Transactional(readOnly = true)
     public List<EncadrantResponse> listerDisponibles() {
         return encadrantRepository.findByActif(true)
                 .stream()
@@ -194,14 +199,35 @@ public class EncadrantService {
                 .departementNom(encadrant.getDepartement() != null ? encadrant.getDepartement().getNom() : null)
                 .specialites(encadrant.getSpecialites() != null
                         ? encadrant.getSpecialites().stream()
-                                .map(specialiteService::toResponse)
+                                .filter(s -> !Boolean.TRUE.equals(s.getArchive()))
+                                .map(this::toSpecialiteResponse)
                                 .collect(Collectors.toList())
                         : List.of())
                 .competences(encadrant.getCompetences() != null
                         ? encadrant.getCompetences().stream()
-                                .map(competenceService::toResponse)
+                                .filter(c -> !Boolean.TRUE.equals(c.getArchive()))
+                                .map(this::toCompetenceResponse)
                                 .collect(Collectors.toList())
                         : List.of())
+                .build();
+    }
+
+    private SpecialiteResponse toSpecialiteResponse(Specialite specialite) {
+        return SpecialiteResponse.builder()
+                .id(specialite.getId())
+                .nom(specialite.getNom())
+                .departementId(specialite.getDepartement() != null ? specialite.getDepartement().getId() : null)
+                .departementNom(specialite.getDepartement() != null ? specialite.getDepartement().getNom() : null)
+                .competences(List.of())
+                .build();
+    }
+
+    private CompetenceResponse toCompetenceResponse(Competence competence) {
+        return CompetenceResponse.builder()
+                .id(competence.getId())
+                .nom(competence.getNom())
+                .specialiteId(competence.getSpecialite() != null ? competence.getSpecialite().getId() : null)
+                .specialiteNom(competence.getSpecialite() != null ? competence.getSpecialite().getNom() : null)
                 .build();
     }
 }

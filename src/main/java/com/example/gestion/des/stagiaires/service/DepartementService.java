@@ -20,12 +20,17 @@ public class DepartementService {
     private final EncadrantRepository encadrantRepository;
 
     public DepartementResponse creer(DepartementRequest request) {
-        if (departementRepository.existsByNomAndArchiveFalse(request.getNom())) {
+        String nomNormalise = request.getNom() != null ? request.getNom().trim() : null;
+        if (nomNormalise == null || nomNormalise.isBlank()) {
+            throw new RuntimeException("Le nom du département est obligatoire");
+        }
+
+        if (departementRepository.existsByNomIgnoreCase(nomNormalise)) {
             throw new RuntimeException("Un département avec ce nom existe déjà");
         }
 
         Departement departement = Departement.builder()
-                .nom(request.getNom())
+                .nom(nomNormalise)
                 .responsable(request.getResponsable())
                 .nombreEncadrantsActuel(0)
                 .nombreStagiairesActuel(0)
@@ -40,7 +45,16 @@ public class DepartementService {
         Departement departement = departementRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Département non trouvé avec l'id : " + id));
 
-        departement.setNom(request.getNom());
+        String nomNormalise = request.getNom() != null ? request.getNom().trim() : null;
+        if (nomNormalise == null || nomNormalise.isBlank()) {
+            throw new RuntimeException("Le nom du département est obligatoire");
+        }
+
+        if (departementRepository.existsByNomIgnoreCaseAndIdNot(nomNormalise, id)) {
+            throw new RuntimeException("Un département avec ce nom existe déjà");
+        }
+
+        departement.setNom(nomNormalise);
         departement.setResponsable(request.getResponsable());
         Departement updated = departementRepository.save(departement);
         return toResponse(updated);

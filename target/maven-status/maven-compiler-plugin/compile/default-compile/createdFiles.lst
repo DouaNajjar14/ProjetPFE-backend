@@ -8,6 +8,7 @@ com\example\gestion\des\stagiaires\dto\DepartementResponse$DepartementResponseBu
 com\example\gestion\des\stagiaires\service\CompetenceService.class
 com\example\gestion\des\stagiaires\repository\CompetenceRepository.class
 com\example\gestion\des\stagiaires\service\SpecialiteUniversitaireService.class
+com\example\gestion\des\stagiaires\repository\TokenRepository.class
 com\example\gestion\des\stagiaires\dto\AgentRHUpdateRequest.class
 com\example\gestion\des\stagiaires\dto\UniversiteResponse.class
 com\example\gestion\des\stagiaires\dto\CandidatureUpdateRequest.class
@@ -53,6 +54,7 @@ com\example\gestion\des\stagiaires\dto\SpecialiteUniversitaireRequest$Specialite
 com\example\gestion\des\stagiaires\entity\Candidat.class
 com\example\gestion\des\stagiaires\entity\Encadrant$EncadrantBuilderImpl.class
 com\example\gestion\des\stagiaires\service\SpecialiteService.class
+com\example\gestion\des\stagiaires\entity\TokenType.class
 com\example\gestion\des\stagiaires\dto\EncadrantResponse.class
 com\example\gestion\des\stagiaires\entity\Utilisateur.class
 com\example\gestion\des\stagiaires\repository\UtilisateurRepository.class
@@ -61,6 +63,7 @@ com\example\gestion\des\stagiaires\service\CandidatService.class
 com\example\gestion\des\stagiaires\repository\CandidatRepository.class
 com\example\gestion\des\stagiaires\service\AgentRHService.class
 com\example\gestion\des\stagiaires\controller\SpecialiteController.class
+com\example\gestion\des\stagiaires\entity\Token.class
 com\example\gestion\des\stagiaires\repository\EncadrantRepository.class
 com\example\gestion\des\stagiaires\config\JacksonConfig.class
 com\example\gestion\des\stagiaires\enums\NIVEAU.class
@@ -93,6 +96,7 @@ com\example\gestion\des\stagiaires\dto\SujetPfeResponse.class
 com\example\gestion\des\stagiaires\dto\AgentRHUpdateRequest$AgentRHUpdateRequestBuilder.class
 com\example\gestion\des\stagiaires\entity\Utilisateur$UtilisateurBuilderImpl.class
 com\example\gestion\des\stagiaires\config\DataInitializer.class
+com\example\gestion\des\stagiaires\controller\AgentRHCandidatureController.class
 com\example\gestion\des\stagiaires\controller\SujetPfeController.class
 com\example\gestion\des\stagiaires\entity\Departement.class
 com\example\gestion\des\stagiaires\config\SecurityConfig.class
@@ -114,5 +118,6 @@ com\example\gestion\des\stagiaires\controller\PublicDepartementController.class
 com\example\gestion\des\stagiaires\service\SujetPfeService.class
 com\example\gestion\des\stagiaires\dto\UniversiteResponse$UniversiteResponseBuilder.class
 com\example\gestion\des\stagiaires\entity\SpecialiteUniversitaire.class
+com\example\gestion\des\stagiaires\entity\Token$TokenBuilder.class
 com\example\gestion\des\stagiaires\dto\LoginRequest.class
 com\example\gestion\des\stagiaires\entity\Departement$DepartementBuilder.class
