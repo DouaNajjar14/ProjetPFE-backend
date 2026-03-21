@@ -23,3 +23,16 @@ ALTER TABLE IF EXISTS stagiaires ALTER COLUMN departement_id DROP NOT NULL;
 
 -- Remove stale legacy string column if it still exists (the entity now uses departement_id FK)
 ALTER TABLE IF EXISTS stagiaires DROP COLUMN IF EXISTS departement;
+
+-- Drop the erroneous specialite_id column from encadrants
+-- (Specialites are now linked via ManyToMany join table encadrant_specialites)
+ALTER TABLE IF EXISTS encadrants DROP COLUMN IF EXISTS specialite_id;
+
+-- Drop the erroneous competences_requises column from sujet_pfe
+-- (Competences are now linked via ManyToMany join table sujet_pfe_competences)
+ALTER TABLE IF EXISTS sujet_pfe DROP COLUMN IF EXISTS competences_requises;
+
+-- Drop the erroneous specialite column from sujet_pfe
+-- (Specialites are now linked via ManyToMany join table sujet_pfe_specialites_universitaires)
+ALTER TABLE IF EXISTS sujet_pfe DROP COLUMN IF EXISTS specialite;
+
