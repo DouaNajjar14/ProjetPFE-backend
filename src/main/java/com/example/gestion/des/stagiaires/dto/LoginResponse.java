@@ -33,4 +33,8 @@ public class LoginResponse {
     private String nom;
     private String prenom;
     private Role role;
+
+    @JsonProperty("premier_login")
+    @Builder.Default
+    private Boolean premierLogin = false;
 }

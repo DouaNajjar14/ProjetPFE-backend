@@ -11,4 +11,5 @@ public class SujetPfeSimpleResponse {
     private UUID id;
     private String titre;
     private String departementNom;
+    private Integer dureeEnMois;
 }

@@ -58,20 +58,21 @@ public class CandidatureController {
     /**
      * Endpoint dédié au changement de statut d'une candidature.
      * Déclenche automatiquement le webhook n8n pour l'envoi d'emails :
-     *   - PRESELECTIONNE : n8n crée un Google Meet basé sur dateEntretien (OBLIGATOIRE)
-     *                      puis envoie l'email avec le lien Meet au(x) candidat(s)
-     *   - ACCEPTE        : n8n envoie un email de félicitations
-     *   - REJETE         : n8n envoie un email de refus
+     * - PRESELECTIONNE : n8n crée un Google Meet basé sur dateEntretien
+     * (OBLIGATOIRE)
+     * puis envoie l'email avec le lien Meet au(x) candidat(s)
+     * - ACCEPTE : n8n envoie un email de félicitations
+     * - REJETE : n8n envoie un email de refus
      *
      * Body JSON exemple (PRESELECTIONNE) :
      * {
-     *   "statut": "PRESELECTIONNE",
-     *   "dateEntretien": "2026-04-15T10:30:00"
+     * "statut": "PRESELECTIONNE",
+     * "dateEntretien": "2026-04-15T10:30:00"
      * }
      *
      * Body JSON exemple (ACCEPTE / REJETE) :
      * {
-     *   "statut": "ACCEPTE"
+     * "statut": "ACCEPTE"
      * }
      */
     @PatchMapping("/{id}/statut")
@@ -82,10 +83,86 @@ public class CandidatureController {
         return ResponseEntity.ok(response);
     }
 
-    @GetMapping
-    public ResponseEntity<List<CandidatureResponse>> listerTous() {
-        return ResponseEntity.ok(candidatureService.listerTous());
+    // ═══════════════════════════════════════════════════════════════════════
+    // PHASE 1 — Workflows RH
+    // ═══════════════════════════════════════════════════════════════════════
+
+    /**
+     * Présélectionner une candidature
+     * Transition : EN_ATTENTE → PRESELECTIONNE
+     * Endpoint : POST /api/candidatures/{id}/preselectionner
+     *
+     * Exemple :
+     * curl -X POST http://localhost:8080/api/candidatures/{id}/preselectionner
+     */
+    @PostMapping("/{id}/preselectionner")
+    public ResponseEntity<CandidatureResponse> preselectionner(@PathVariable UUID id) {
+        CandidatureResponse response = candidatureService.preselectionner(id);
+        return ResponseEntity.ok(response);
     }
+
+    /**
+     * Planifier l'entretien d'une candidature
+     * Transition : PRESELECTIONNE → ENTRETIEN
+     * Endpoint : POST /api/candidatures/{id}/planifier-entretien
+     *
+     * Body JSON :
+     * {
+     * "dateEntretien": "2026-04-20T14:00:00"
+     * }
+     *
+     * n8n sera notifié pour :
+     * 1. Créer un Google Meet automatiquement
+     * 2. Envoyer l'email avec le lien Meet au candidat
+     */
+    @PostMapping("/{id}/planifier-entretien")
+    public ResponseEntity<CandidatureResponse> planiferEntretien(
+            @PathVariable UUID id,
+            @RequestBody CandidatureUpdateRequest request) {
+        CandidatureResponse response = candidatureService.planiferEntretien(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Accepter une candidature après entretien
+     * Transition : ENTRETIEN → ACCEPTE
+     * Endpoint : POST /api/candidatures/{id}/accepter
+     *
+     * Body JSON :
+     * {
+     * "dateDebut": "2026-07-01",
+     * "dateFin": "2026-09-01"
+     * }
+     *
+     * n8n sera notifié pour envoyer l'email d'acceptation avec les dates du stage
+     */
+    @PostMapping("/{id}/accepter")
+    public ResponseEntity<CandidatureResponse> accepterCandidature(
+            @PathVariable UUID id,
+            @RequestBody CandidatureUpdateRequest request) {
+        CandidatureResponse response = candidatureService.accepterCandidature(id, request);
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Refuser une candidature
+     * Transition : * → REFUSE (depuis n'importe quel état)
+     * Endpoint : POST /api/candidatures/{id}/refuser
+     *
+     * n8n sera notifié pour envoyer l'email de refus au candidat
+     *
+     * Exemple :
+     * curl -X POST http://localhost:8080/api/candidatures/{id}/refuser
+     */
+    @PostMapping("/{id}/refuser")
+    public ResponseEntity<CandidatureResponse> refuserCandidature(@PathVariable UUID id) {
+        CandidatureResponse response = candidatureService.refuserCandidature(id);
+        return ResponseEntity.ok(response);
+    }
+
+    // ─────────────────────────────────────────────
+    // Endpoints de consultation
+    // ─────────────────────────────────────────────
 
     @GetMapping("/{id}")
     public ResponseEntity<CandidatureResponse> trouverParId(@PathVariable UUID id) {

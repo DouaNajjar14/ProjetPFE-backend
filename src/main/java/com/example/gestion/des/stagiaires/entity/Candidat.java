@@ -34,9 +34,10 @@ public class Candidat {
     @Column(nullable = false)
     private NIVEAU niveauAcademique;
 
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String cv;
 
+    @Column(nullable = true)
     private String lettreMotivation;
 
     @ManyToOne(fetch = FetchType.LAZY)

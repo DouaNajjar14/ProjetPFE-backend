@@ -14,4 +14,5 @@ public class CompetenceResponse {
     private String nom;
     private Long specialiteId;
     private String specialiteNom;
+    private Boolean archive;
 }

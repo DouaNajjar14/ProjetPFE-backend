@@ -321,12 +321,14 @@
           <h2 class="drawer-head-name">
             {{ c.candidat1?.prenom }} {{ c.candidat1?.nom }}
           </h2>
-          <p class="drawer-head-uni">{{ c.candidat1?.universiteNom }}</p>
-          <div class="drawer-head-tags">
+          <div class="drawer-head-info-grid">
+            <p class="drawer-head-uni">{{ c.candidat1?.universiteNom }}</p>
             <p-tag
               [value]="getTypeLabel(c.typeStage)"
               [severity]="getTypeSeverity(c.typeStage)"
             />
+          </div>
+          <div class="drawer-head-tags">
             <p-tag
               [value]="getStatutLabel(c.statut)"
               [severity]="
@@ -398,18 +400,26 @@
             </div>
             <div class="drawer-field">
               <span class="drawer-field-label">
-                <i class="pi pi-graduation-cap mr-1 text-xs"></i>Niveau
+                <i class="pi pi-building mr-1 text-xs"></i>Université
               </span>
-              <span class="drawer-field-value">{{
-                c.candidat1.niveauAcademique
+              <span class="drawer-field-value truncate">{{
+                c.candidat1.universiteNom
               }}</span>
             </div>
             <div class="drawer-field">
               <span class="drawer-field-label">
-                <i class="pi pi-building mr-1 text-xs"></i>Établissement
+                <i class="pi pi-list mr-1 text-xs"></i>Type candidature
               </span>
-              <span class="drawer-field-value truncate">{{
-                c.candidat1.universiteNom
+              <span class="drawer-field-value">{{ getTypeLabel(c.typeStage) }}</span>
+            </div>
+          </div>
+          <div class="drawer-grid-1">
+            <div class="drawer-field">
+              <span class="drawer-field-label">
+                <i class="pi pi-graduation-cap mr-1 text-xs"></i>Niveau
+              </span>
+              <span class="drawer-field-value">{{
+                c.candidat1.niveauAcademique
               }}</span>
             </div>
           </div>

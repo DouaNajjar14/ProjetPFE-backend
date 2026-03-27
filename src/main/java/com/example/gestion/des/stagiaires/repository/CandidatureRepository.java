@@ -32,4 +32,75 @@ public interface CandidatureRepository extends JpaRepository<Candidature, UUID> 
 
     @Query("SELECT c FROM Candidature c ORDER BY c.dateDepot DESC")
     List<Candidature> findAllOrderByDateDepotDesc();
+
+    // ═══════════════════════════════════════════════════════════════════════
+    // REQUÊTES SPÉCIALISÉES — Détection des doublons
+    // ═══════════════════════════════════════════════════════════════════════
+
+    /**
+     * Recherche candidatures existantes pour le même email, type et année
+     * Exclut les candidatures refusées
+     */
+    @Query("SELECT c FROM Candidature c " +
+            "WHERE c.candidat1.email = :email " +
+            "AND c.typeStage = :typeStage " +
+            "AND c.annee = :year " +
+            "AND CAST(c.statut AS string) != 'REFUSE'")
+    List<Candidature> findByEmailTypeYearActive(
+            @Param("email") String email,
+            @Param("typeStage") TypeStage typeStage,
+            @Param("year") Integer year);
+
+    /**
+     * Recherche candidatures d'un candidat pour un type et année donnés
+     */
+    @Query("SELECT c FROM Candidature c " +
+            "WHERE (c.candidat1.id = :candidatId OR c.candidat2.id = :candidatId) " +
+            "AND c.typeStage = :typeStage " +
+            "AND c.annee = :year " +
+            "AND CAST(c.statut AS string) != 'REFUSE'")
+    List<Candidature> findByCandidatAndTypeAndYear(
+            @Param("candidatId") UUID candidatId,
+            @Param("typeStage") TypeStage typeStage,
+            @Param("year") Integer year);
+
+    /**
+     * Recherche candidatures avec le même nom et prénom mais email différent
+     * Utilisé pour détecter les homonymes
+     */
+    @Query("SELECT c FROM Candidature c " +
+            "WHERE c.candidat1.nom = :nom " +
+            "AND c.candidat1.prenom = :prenom " +
+            "AND c.candidat1.email != :email")
+    List<Candidature> findByNomPrenomButDifferentEmail(
+            @Param("nom") String nom,
+            @Param("prenom") String prenom,
+            @Param("email") String email);
+
+    /**
+     * Compte le nombre de candidatures par statut pour une année donnée
+     */
+    @Query("SELECT COUNT(c) FROM Candidature c " +
+            "WHERE c.statut = :statut AND c.annee = :year")
+    Long countByStatutAndYear(
+            @Param("statut") StatutCandidature statut,
+            @Param("year") Integer year);
+
+    /**
+     * Compte le nombre de candidatures par type et année
+     */
+    @Query("SELECT COUNT(c) FROM Candidature c " +
+            "WHERE c.typeStage = :typeStage AND c.annee = :year")
+    Long countByTypeStageAndYear(
+            @Param("typeStage") TypeStage typeStage,
+            @Param("year") Integer year);
+
+    /**
+     * Récupère les candidatures en attente pour un type de stage
+     */
+    @Query("SELECT c FROM Candidature c " +
+            "WHERE c.typeStage = :typeStage " +
+            "AND c.statut = 'EN_ATTENTE' " +
+            "ORDER BY c.dateDepot ASC")
+    List<Candidature> findPendingByTypeStage(@Param("typeStage") TypeStage typeStage);
 }

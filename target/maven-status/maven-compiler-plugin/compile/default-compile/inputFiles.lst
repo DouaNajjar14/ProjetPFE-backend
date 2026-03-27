@@ -1,100 +1,136 @@
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\config\ApplicationConfig.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\config\DataInitializer.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\config\JacksonConfig.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\config\JwtAuthenticationFilter.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\config\SecurityConfig.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\AgentRHController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\AuthController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\CandidatController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\CandidatureController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\CompetenceController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\ConfirmDirectController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\DepartementController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\EncadrantController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\N8nPendingAccountController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\PendingAccountAdminController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\PublicDepartementController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\PublicSujetPfeController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\SpecialiteController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\SpecialiteUniversitaireController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\StagiaireController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\SujetPfeController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\controller\UniversiteController.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHUpdateRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureUpdateRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CompetenceRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\CompetenceResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\DepartementRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\DepartementResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantUpdateRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\LoginRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\LoginResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\PendingAccountRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\PendingAccountResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteUniversitaireRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteUniversitaireResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\StagiaireResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\StatutCandidatureRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeSimpleResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\UniversiteRequest.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\dto\UniversiteResponse.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Candidat.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Candidature.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Competence.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Departement.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Encadrant.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\PendingAccount.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Specialite.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\SpecialiteUniversitaire.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Stagiaire.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\SujetPfe.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Universite.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\entity\Utilisateur.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\NIVEAU.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\PendingAccountStatus.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\Role.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\STATUT.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\StatutCandidature.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\StatutStagiaire.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\enums\TypeStage.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\exception\GlobalExceptionHandler.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\GestionDesStagiairesApplication.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\CandidatRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\CandidatureRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\CompetenceRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\DepartementRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\EncadrantRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\PendingAccountRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteUniversitaireRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\StagiaireRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\SujetPfeRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\UniversiteRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\repository\UtilisateurRepository.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\AgentRHService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\AuthenticationService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\CandidatService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\CandidatureService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\CompetenceService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\DepartementService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\EncadrantService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\FileStorageService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\JwtService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\PendingAccountService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\SpecialiteService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\SpecialiteUniversitaireService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\StagiaireService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\SujetPfeService.java
-C:\Users\Ahmed Yassin\Downloads\ProjetPFE-backend-main\ProjetPFE-backend-main\src\main\java\com\example\gestion\des\stagiaires\service\UniversiteService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\ApplicationConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\DataInitializer.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\JacksonConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\JwtAuthenticationFilter.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\MinioConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\config\SecurityConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\AgentRHController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\AuthController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\CandidatController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\CandidatureController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\CompetenceController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\ConfirmDirectController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\DepartementController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\DocumentCandidatureController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\DocumentController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\EncadrantController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\N8nPendingAccountController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\PendingAccountAdminController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\ProfilController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\PublicDepartementController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\PublicSujetPfeController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\SpecialiteController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\SpecialiteUniversitaireController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\StagiaireController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\SujetPfeController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\controller\UniversiteController.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\converter\MonthDayConverter.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ActiviteLogResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\AgentRHUpdateRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureResponseWithDoublon.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CandidatureUpdateRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CapaciteRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ChangePasswordRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ChangePasswordResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ChangerMotDePasseRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CompetenceRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\CompetenceResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\DepartementRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\DepartementResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\DocumentUrlResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\DoublonCheckResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\EncadrantUpdateRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\LoginRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\LoginResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ModifierCoordonneeRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\PendingAccountRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\PendingAccountResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\ProfilUtilisateurResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SessionActiveResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteUniversitaireRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SpecialiteUniversitaireResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\StagiaireResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\StatutCandidatureRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\SujetPfeSimpleResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\UniversiteRequest.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\dto\UniversiteResponse.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Admin.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\AgentRH.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Candidat.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Candidature.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Competence.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Departement.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Encadrant.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\PendingAccount.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\SessionConfig.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Specialite.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\SpecialiteUniversitaire.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Stagiaire.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\SujetPfe.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Universite.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\entity\Utilisateur.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\NIVEAU.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\PendingAccountStatus.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\Role.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\SessionType.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\STATUT.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\StatutCandidature.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\StatutDocuments.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\StatutGlobal.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\StatutStagiaire.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\enums\TypeStage.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\exception\DocumentAccessDeniedException.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\exception\DocumentNotFoundException.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\exception\GlobalExceptionHandler.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\exception\InvalidFileException.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\exception\ValidationException.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\GestionDesStagiairesApplication.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\AdminRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\AgentRHRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\CandidatRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\CandidatureRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\CompetenceRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\DepartementRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\EncadrantRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\PendingAccountRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SessionConfigRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SpecialiteUniversitaireRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\StagiaireRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\SujetPfeRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\UniversiteRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\repository\UtilisateurRepository.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\AgentRHService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\AuthenticationService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\CandidatService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\CandidatureService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\CompetenceService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\DepartementService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\DocumentCandidatureService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\doublon\DoublonCheckResult.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\doublon\DoublonLevel.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\doublon\DoublonValidator.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\EncadrantService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\FileStorageService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\JwtService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\MinioService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\PendingAccountService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\ProfilService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\SessionConfigService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\SpecialiteService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\SpecialiteUniversitaireService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\StagiaireService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\SujetPfeService.java
+C:\Users\douan\OneDrive\Bureau\pfe\projet-pfe\gestion-des-stagiaires-backend\src\main\java\com\example\gestion\des\stagiaires\service\UniversiteService.java

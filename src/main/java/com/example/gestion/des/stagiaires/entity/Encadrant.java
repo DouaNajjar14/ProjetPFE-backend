@@ -14,6 +14,7 @@ import java.util.Set;
 @AllArgsConstructor
 @SuperBuilder
 @Table(name = "encadrants")
+@PrimaryKeyJoinColumn(name = "id")
 public class Encadrant extends Utilisateur {
 
     @Column(name = "capacite_max", nullable = false)

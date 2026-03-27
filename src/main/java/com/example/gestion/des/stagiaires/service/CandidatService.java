@@ -7,6 +7,7 @@ import com.example.gestion.des.stagiaires.entity.Universite;
 import com.example.gestion.des.stagiaires.repository.CandidatRepository;
 import com.example.gestion.des.stagiaires.repository.UniversiteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -18,64 +19,79 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class CandidatService {
 
-    private final CandidatRepository candidatRepository;
-    private final UniversiteRepository universiteRepository;
-    private final FileStorageService fileStorageService;
+        private final CandidatRepository candidatRepository;
+        private final UniversiteRepository universiteRepository;
+        private final MinioService minioService;
 
-    public Candidat creerOuTrouver(CandidatRequest request, MultipartFile cv, MultipartFile lettreMotivation) {
-        // Vérifier si le candidat existe déjà
-        return candidatRepository.findByEmail(request.getEmail())
-                .orElseGet(() -> creerNouveauCandidat(request, cv, lettreMotivation));
-    }
+        @Value("${minio.bucket.candidatures}")
+        private String bucketName;
 
-    private Candidat creerNouveauCandidat(CandidatRequest request, MultipartFile cv, MultipartFile lettreMotivation) {
-        Universite universite = universiteRepository.findById(request.getUniversiteId())
-                .orElseThrow(() -> new RuntimeException("Université non trouvée"));
+        public Candidat creerOuTrouver(CandidatRequest request, MultipartFile cv, MultipartFile lettreMotivation) {
+                // Vérifier si le candidat existe déjà
+                return candidatRepository.findByEmail(request.getEmail())
+                                .orElseGet(() -> creerNouveauCandidat(request, cv, lettreMotivation));
+        }
 
-        String cvPath = fileStorageService.storeFile(cv, "cv");
-        String lettrePath = lettreMotivation != null && !lettreMotivation.isEmpty()
-                ? fileStorageService.storeFile(lettreMotivation, "lettres")
-                : null;
+        private Candidat creerNouveauCandidat(CandidatRequest request, MultipartFile cv,
+                        MultipartFile lettreMotivation) {
+                Universite universite = universiteRepository.findById(request.getUniversiteId())
+                                .orElseThrow(() -> new RuntimeException("Université non trouvée"));
 
-        Candidat candidat = Candidat.builder()
-                .nom(request.getNom())
-                .prenom(request.getPrenom())
-                .email(request.getEmail())
-                .tel(request.getTel())
-                .niveauAcademique(request.getNiveauAcademique())
-                .cv(cvPath)
-                .lettreMotivation(lettrePath)
-                .universite(universite)
-                .build();
+                // Create candidat first to get UUID
+                Candidat candidat = Candidat.builder()
+                                .nom(request.getNom())
+                                .prenom(request.getPrenom())
+                                .email(request.getEmail())
+                                .tel(request.getTel())
+                                .niveauAcademique(request.getNiveauAcademique())
+                                .universite(universite)
+                                .build();
 
-        return candidatRepository.save(candidat);
-    }
+                // Save to get UUID
+                Candidat savedCandidat = candidatRepository.save(candidat);
 
-    public List<CandidatResponse> listerTous() {
-        return candidatRepository.findAll()
-                .stream()
-                .map(this::toResponse)
-                .collect(Collectors.toList());
-    }
+                // Upload CV to MinIO
+                if (cv != null && !cv.isEmpty()) {
+                        String cvKey = "candidatures/" + savedCandidat.getId() + "/cv.pdf";
+                        minioService.uploadFichier(cv, bucketName, cvKey);
+                        savedCandidat.setCv(cvKey);
+                }
 
-    public CandidatResponse trouverParId(UUID id) {
-        Candidat candidat = candidatRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Candidat non trouvé avec l'id : " + id));
-        return toResponse(candidat);
-    }
+                // Upload lettre de motivation to MinIO
+                if (lettreMotivation != null && !lettreMotivation.isEmpty()) {
+                        String lettreKey = "candidatures/" + savedCandidat.getId() + "/lettre.pdf";
+                        minioService.uploadFichier(lettreMotivation, bucketName, lettreKey);
+                        savedCandidat.setLettreMotivation(lettreKey);
+                }
 
-    public CandidatResponse toResponse(Candidat candidat) {
-        return CandidatResponse.builder()
-                .id(candidat.getId())
-                .nom(candidat.getNom())
-                .prenom(candidat.getPrenom())
-                .email(candidat.getEmail())
-                .tel(candidat.getTel())
-                .niveauAcademique(candidat.getNiveauAcademique())
-                .cv(candidat.getCv())
-                .lettreMotivation(candidat.getLettreMotivation())
-                .universiteId(candidat.getUniversite().getId())
-                .universiteNom(candidat.getUniversite().getNom())
-                .build();
-    }
+                return candidatRepository.save(savedCandidat);
+        }
+
+        public List<CandidatResponse> listerTous() {
+                return candidatRepository.findAll()
+                                .stream()
+                                .map(this::toResponse)
+                                .collect(Collectors.toList());
+        }
+
+        public CandidatResponse trouverParId(UUID id) {
+                Candidat candidat = candidatRepository.findById(id)
+                                .orElseThrow(() -> new RuntimeException("Candidat non trouvé avec l'id : " + id));
+                return toResponse(candidat);
+        }
+
+        public CandidatResponse toResponse(Candidat candidat) {
+                return CandidatResponse.builder()
+                                .id(candidat.getId())
+                                .nom(candidat.getNom())
+                                .prenom(candidat.getPrenom())
+                                .email(candidat.getEmail())
+                                .tel(candidat.getTel())
+                                .niveauAcademique(candidat.getNiveauAcademique())
+                                .cv(candidat.getCv())
+                                .lettreMotivation(candidat.getLettreMotivation())
+                                .universiteId(candidat.getUniversite().getId())
+                                .universiteNom(candidat.getUniversite().getNom())
+                                .build();
+        }
 }

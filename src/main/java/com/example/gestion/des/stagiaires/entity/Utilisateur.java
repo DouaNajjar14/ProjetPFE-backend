@@ -48,6 +48,13 @@ public class Utilisateur implements UserDetails {
     @Builder.Default
     private Boolean actif = true;
 
+    @Builder.Default
+    @Column(name = "premier_login")
+    private Boolean premierLogin = true; // true = doit changer son mdp à la 1ère connexion
+
+    @Column(name = "date_changement_mdp")
+    private LocalDateTime dateChangementMotDePasse;
+
     @Column(updatable = false)
     private LocalDateTime dateCreation;
 

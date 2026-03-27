@@ -178,6 +178,21 @@ public class EncadrantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public EncadrantResponse modifierCapacite(UUID id, Integer nouvelleCapacite) {
+        Encadrant encadrant = encadrantRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Encadrant non trouvé avec l'id : " + id));
+
+        if (nouvelleCapacite < encadrant.getCapaciteActuelle()) {
+            throw new RuntimeException("La nouvelle capacité ne peut pas être inférieure à la capacité actuelle ("
+                    + encadrant.getCapaciteActuelle() + ")");
+        }
+
+        encadrant.setCapaciteMax(nouvelleCapacite);
+        Encadrant updated = encadrantRepository.save(encadrant);
+        return toResponse(updated);
+    }
+
     private EncadrantResponse toResponse(Encadrant encadrant) {
         return EncadrantResponse.builder()
                 .id(encadrant.getId())

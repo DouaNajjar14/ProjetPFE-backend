@@ -1,6 +1,6 @@
 package com.example.gestion.des.stagiaires.config;
 
-import com.example.gestion.des.stagiaires.entity.Utilisateur;
+import com.example.gestion.des.stagiaires.entity.Admin;
 import com.example.gestion.des.stagiaires.enums.Role;
 import com.example.gestion.des.stagiaires.repository.UtilisateurRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,20 +19,26 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        // Créer un admin par défaut si aucun n'existe
-        if (!utilisateurRepository.existsByEmail("admin@ooredoo.tn")) {
-            Utilisateur admin = Utilisateur.builder()
-                    .nom("Admin")
-                    .prenom("System")
-                    .email("admin@ooredoo.tn")
-                    .motDePasse(passwordEncoder.encode("Admin123@"))
-                    .tel("00000000")
-                    .role(Role.ADMIN)
-                    .actif(true)
-                    .build();
+        try {
+            // Créer un administrateur par défaut si aucun n'existe
+            if (!utilisateurRepository.existsByEmail("admin@ooredoo.tn")) {
+                Admin admin = Admin.builder()
+                        .nom("System")
+                        .prenom("Admin")
+                        .email("admin@ooredoo.tn")
+                        .motDePasse(passwordEncoder.encode("Admin123@"))
+                        .tel("00000000")
+                        .role(Role.ADMIN)
+                        .actif(true)
+                        .build();
 
-            utilisateurRepository.save(admin);
-            log.info("Admin par défaut créé : admin@ooredoo.tn / Admin123@");
+                utilisateurRepository.save(admin);
+                log.info("✅ Admin créé automatiquement : admin@ooredoo.tn / Admin123@");
+            } else {
+                log.info("✅ Admin existe déjà : admin@ooredoo.tn");
+            }
+        } catch (Exception e) {
+            log.warn("⚠️ Erreur lors de la création de l'admin: {}", e.getMessage());
         }
     }
 }

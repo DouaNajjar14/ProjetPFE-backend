@@ -72,6 +72,22 @@ public class CompetenceService {
         competenceRepository.deleteById(id);
     }
 
+    public CompetenceResponse archiver(Long id) {
+        Competence competence = competenceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Compétence non trouvée avec l'id : " + id));
+        competence.setArchive(true);
+        Competence updated = competenceRepository.save(competence);
+        return toResponse(updated);
+    }
+
+    public CompetenceResponse desarchiver(Long id) {
+        Competence competence = competenceRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Compétence non trouvée avec l'id : " + id));
+        competence.setArchive(false);
+        Competence updated = competenceRepository.save(competence);
+        return toResponse(updated);
+    }
+
     public List<CompetenceResponse> listerToutes() {
         return competenceRepository.findAll()
                 .stream()
@@ -82,6 +98,15 @@ public class CompetenceService {
     public List<CompetenceResponse> listerParSpecialite(Long specialiteId) {
         return competenceRepository.findBySpecialiteId(specialiteId)
                 .stream()
+                .filter(c -> !Boolean.TRUE.equals(c.getArchive()))
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<CompetenceResponse> listerArchivesParSpecialite(Long specialiteId) {
+        return competenceRepository.findBySpecialiteId(specialiteId)
+                .stream()
+                .filter(c -> Boolean.TRUE.equals(c.getArchive()))
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
@@ -98,6 +123,7 @@ public class CompetenceService {
                 .nom(competence.getNom())
                 .specialiteId(competence.getSpecialite() != null ? competence.getSpecialite().getId() : null)
                 .specialiteNom(competence.getSpecialite() != null ? competence.getSpecialite().getNom() : null)
+                .archive(Boolean.TRUE.equals(competence.getArchive()))
                 .build();
     }
 }

@@ -75,6 +75,22 @@ public class SpecialiteService {
         specialiteRepository.deleteById(id);
     }
 
+    public SpecialiteResponse archiver(Long id) {
+        Specialite specialite = specialiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));
+        specialite.setArchive(true);
+        Specialite updated = specialiteRepository.save(specialite);
+        return toResponse(updated);
+    }
+
+    public SpecialiteResponse desarchiver(Long id) {
+        Specialite specialite = specialiteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Spécialité non trouvée avec l'id : " + id));
+        specialite.setArchive(false);
+        Specialite updated = specialiteRepository.save(specialite);
+        return toResponse(updated);
+    }
+
     public List<SpecialiteResponse> listerToutes() {
         return specialiteRepository.findAll()
                 .stream()
@@ -85,6 +101,15 @@ public class SpecialiteService {
     public List<SpecialiteResponse> listerParDepartement(UUID departementId) {
         return specialiteRepository.findByDepartementId(departementId)
                 .stream()
+                .filter(s -> !Boolean.TRUE.equals(s.getArchive()))
+                .map(this::toResponse)
+                .collect(Collectors.toList());
+    }
+
+    public List<SpecialiteResponse> listerArchivesParDepartement(UUID departementId) {
+        return specialiteRepository.findByDepartementId(departementId)
+                .stream()
+                .filter(s -> Boolean.TRUE.equals(s.getArchive()))
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
@@ -101,6 +126,7 @@ public class SpecialiteService {
                 .nom(specialite.getNom())
                 .departementId(specialite.getDepartement() != null ? specialite.getDepartement().getId() : null)
                 .departementNom(specialite.getDepartement() != null ? specialite.getDepartement().getNom() : null)
+                .archive(Boolean.TRUE.equals(specialite.getArchive()))
                 .competences(specialite.getCompetences() != null
                         ? specialite.getCompetences().stream()
                                 .map(competenceService::toResponse)

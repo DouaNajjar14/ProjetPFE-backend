@@ -1,5 +1,6 @@
 package com.example.gestion.des.stagiaires.controller;
 
+import com.example.gestion.des.stagiaires.dto.CapaciteRequest;
 import com.example.gestion.des.stagiaires.dto.EncadrantRequest;
 import com.example.gestion.des.stagiaires.dto.EncadrantResponse;
 import com.example.gestion.des.stagiaires.dto.EncadrantUpdateRequest;
@@ -48,6 +49,15 @@ public class EncadrantController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<EncadrantResponse> desarchiver(@PathVariable UUID id) {
         EncadrantResponse response = encadrantService.desarchiver(id);
+        return ResponseEntity.ok(response);
+    }
+
+    @PatchMapping("/{id}/capacite")
+    @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
+    public ResponseEntity<EncadrantResponse> modifierCapacite(
+            @PathVariable UUID id,
+            @Valid @RequestBody CapaciteRequest request) {
+        EncadrantResponse response = encadrantService.modifierCapacite(id, request.getCapaciteMax());
         return ResponseEntity.ok(response);
     }
 

@@ -4,11 +4,13 @@ import com.example.gestion.des.stagiaires.dto.*;
 import com.example.gestion.des.stagiaires.entity.SujetPfe;
 import com.example.gestion.des.stagiaires.entity.Utilisateur;
 import com.example.gestion.des.stagiaires.entity.Candidature;
+import com.example.gestion.des.stagiaires.entity.AgentRH;
 import com.example.gestion.des.stagiaires.enums.Role;
 import com.example.gestion.des.stagiaires.enums.StatutCandidature;
 import com.example.gestion.des.stagiaires.enums.TypeStage;
 import com.example.gestion.des.stagiaires.repository.CandidatureRepository;
 import com.example.gestion.des.stagiaires.repository.UtilisateurRepository;
+import com.example.gestion.des.stagiaires.repository.AgentRHRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -23,17 +25,20 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class AgentRHService {
 
+    private final AgentRHRepository agentRHRepository;
     private final UtilisateurRepository utilisateurRepository;
     private final PasswordEncoder passwordEncoder;
     private final CandidatureRepository candidatureRepository;
     private final CandidatService candidatService;
 
     public AgentRHResponse creer(AgentRHRequest request) {
+        // Vérifier email dans la base complète
         if (utilisateurRepository.existsByEmail(request.getEmail())) {
             throw new RuntimeException("Un utilisateur avec cet email existe déjà");
         }
 
-        Utilisateur agent = Utilisateur.builder()
+        // Créer un AgentRH (pas un Utilisateur générique)
+        AgentRH agent = AgentRH.builder()
                 .nom(request.getNom())
                 .prenom(request.getPrenom())
                 .email(request.getEmail())
@@ -43,12 +48,13 @@ public class AgentRHService {
                 .actif(true)
                 .build();
 
-        Utilisateur saved = utilisateurRepository.save(agent);
+        // Sauvegarder dans la table agents_rh via JOINED inheritance
+        AgentRH saved = agentRHRepository.save(agent);
         return toResponse(saved);
     }
 
     public AgentRHResponse modifier(UUID id, AgentRHUpdateRequest request) {
-        Utilisateur agent = utilisateurRepository.findByIdAndRole(id, Role.AGENT_RH)
+        AgentRH agent = agentRHRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agent RH non trouvé avec l'id : " + id));
 
         // Vérifier si l'email est déjà utilisé par un autre utilisateur
@@ -61,56 +67,56 @@ public class AgentRHService {
         agent.setEmail(request.getEmail());
         agent.setTel(request.getTel());
 
-        Utilisateur updated = utilisateurRepository.save(agent);
+        AgentRH updated = agentRHRepository.save(agent);
         return toResponse(updated);
     }
 
     public AgentRHResponse archiver(UUID id) {
-        Utilisateur agent = utilisateurRepository.findByIdAndRole(id, Role.AGENT_RH)
+        AgentRH agent = agentRHRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agent RH non trouvé avec l'id : " + id));
 
         agent.setActif(false);
-        Utilisateur archived = utilisateurRepository.save(agent);
+        AgentRH archived = agentRHRepository.save(agent);
         return toResponse(archived);
     }
 
     public AgentRHResponse desarchiver(UUID id) {
-        Utilisateur agent = utilisateurRepository.findByIdAndRole(id, Role.AGENT_RH)
+        AgentRH agent = agentRHRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agent RH non trouvé avec l'id : " + id));
 
         agent.setActif(true);
-        Utilisateur unarchived = utilisateurRepository.save(agent);
+        AgentRH unarchived = agentRHRepository.save(agent);
         return toResponse(unarchived);
     }
 
     public List<AgentRHResponse> listerActifs() {
-        return utilisateurRepository.findByRoleAndActif(Role.AGENT_RH, true)
+        return agentRHRepository.findByActifTrueOrderByNomAsc()
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
     public List<AgentRHResponse> listerArchives() {
-        return utilisateurRepository.findByRoleAndActif(Role.AGENT_RH, false)
+        return agentRHRepository.findArchives()
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
     public List<AgentRHResponse> listerTous() {
-        return utilisateurRepository.findByRole(Role.AGENT_RH)
+        return agentRHRepository.findAll()
                 .stream()
                 .map(this::toResponse)
                 .collect(Collectors.toList());
     }
 
     public AgentRHResponse trouverParId(UUID id) {
-        Utilisateur agent = utilisateurRepository.findByIdAndRole(id, Role.AGENT_RH)
+        AgentRH agent = agentRHRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Agent RH non trouvé avec l'id : " + id));
         return toResponse(agent);
     }
 
-    private AgentRHResponse toResponse(Utilisateur agent) {
+    private AgentRHResponse toResponse(AgentRH agent) {
         return AgentRHResponse.builder()
                 .id(agent.getId())
                 .nom(agent.getNom())
@@ -124,7 +130,7 @@ public class AgentRHService {
     }
 
     // ─────────────────────────────────────────────────────────────────────────
-    //  Consultation des candidatures (lecture seule)
+    // Consultation des candidatures (lecture seule)
     // ─────────────────────────────────────────────────────────────────────────
 
     public List<CandidatureResponse> listerToutesCandidatures() {
@@ -200,7 +206,7 @@ public class AgentRHService {
                 .id(sujet.getId())
                 .titre(sujet.getTitre())
                 .departementNom(sujet.getDepartement().getNom())
+                .dureeEnMois(sujet.getDureeEnMois())
                 .build();
     }
 }
-

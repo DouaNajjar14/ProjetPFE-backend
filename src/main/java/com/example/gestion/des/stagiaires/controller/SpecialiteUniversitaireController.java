@@ -13,13 +13,30 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/admin/specialites-universitaires")
 @RequiredArgsConstructor
 public class SpecialiteUniversitaireController {
 
     private final SpecialiteUniversitaireService service;
 
-    @PostMapping
+    // ═══════════════════════════════════════════════════════════════
+    // PUBLIC ENDPOINTS (No authentication required)
+    // ═══════════════════════════════════════════════════════════════
+
+    @GetMapping("/api/public/specialites-universitaires")
+    public ResponseEntity<List<SpecialiteUniversitaireResponse>> listerPublic() {
+        return ResponseEntity.ok(service.listerToutes());
+    }
+
+    @GetMapping("/api/public/specialites-universitaires/{id}")
+    public ResponseEntity<SpecialiteUniversitaireResponse> trouverParIdPublic(@PathVariable Long id) {
+        return ResponseEntity.ok(service.trouverParId(id));
+    }
+
+    // ═══════════════════════════════════════════════════════════════
+    // ADMIN ENDPOINTS (Authentication required)
+    // ═══════════════════════════════════════════════════════════════
+
+    @PostMapping("/api/admin/specialites-universitaires")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SpecialiteUniversitaireResponse> creer(
             @Valid @RequestBody SpecialiteUniversitaireRequest request) {
@@ -27,7 +44,7 @@ public class SpecialiteUniversitaireController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/api/admin/specialites-universitaires/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<SpecialiteUniversitaireResponse> modifier(
             @PathVariable Long id,
@@ -36,20 +53,20 @@ public class SpecialiteUniversitaireController {
         return ResponseEntity.ok(response);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/api/admin/specialites-universitaires/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<Void> supprimer(@PathVariable Long id) {
         service.supprimer(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/api/admin/specialites-universitaires")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
     public ResponseEntity<List<SpecialiteUniversitaireResponse>> lister() {
         return ResponseEntity.ok(service.listerToutes());
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/api/admin/specialites-universitaires/{id}")
     @PreAuthorize("hasAnyRole('ADMIN', 'AGENT_RH')")
     public ResponseEntity<SpecialiteUniversitaireResponse> trouverParId(@PathVariable Long id) {
         return ResponseEntity.ok(service.trouverParId(id));

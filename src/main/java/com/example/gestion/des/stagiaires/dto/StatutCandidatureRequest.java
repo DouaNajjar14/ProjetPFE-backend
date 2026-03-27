@@ -4,14 +4,15 @@ import com.example.gestion.des.stagiaires.enums.StatutCandidature;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
- * DTO utilisé pour mettre à jour uniquement le statut d'une candidature.
+ * DTO utilisé pour mettre à jour le statut d'une candidature.
  * - Si le statut est PRESELECTIONNE, dateEntretien est obligatoire
- *   (n8n l'utilisera pour créer le lien Google Meet automatiquement).
+ * (n8n l'utilisera pour créer le lien Google Meet automatiquement).
  * - Si le statut est ACCEPTE, dateDebut est obligatoire
- *   (n8n l'inclura dans l'email de confirmation envoyé au candidat).
+ * (n8n l'inclura dans l'email de confirmation envoyé au candidat).
  */
 @Data
 public class StatutCandidatureRequest {
@@ -27,8 +28,15 @@ public class StatutCandidatureRequest {
 
     /**
      * Obligatoire si statut = ACCEPTE.
-     * Date de début du stage. Format ISO-8601 : "2026-05-01T08:00:00"
+     * Date de début du stage (sans heure).
+     * Format ISO-8601 : "2026-05-01"
      */
-    private LocalDateTime dateDebut;
-}
+    private LocalDate dateDebut;
 
+    /**
+     * Optionnel si statut = ACCEPTE.
+     * Date de fin du stage (sans heure).
+     * Format ISO-8601 : "2026-08-31"
+     */
+    private LocalDate dateFin;
+}

@@ -19,8 +19,10 @@ public class AgentRHResponse {
     private String prenom;
     private String email;
     private String tel;
-    private Boolean actif;
+
+    @Builder.Default
+    private boolean actif = true;
+
     private LocalDateTime dateCreation;
     private LocalDateTime dateModification;
 }
-

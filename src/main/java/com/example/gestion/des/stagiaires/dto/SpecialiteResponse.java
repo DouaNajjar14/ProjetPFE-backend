@@ -18,4 +18,5 @@ public class SpecialiteResponse {
     private UUID departementId;
     private String departementNom;
     private List<CompetenceResponse> competences;
+    private Boolean archive;
 }
